@@ -1,7 +1,7 @@
 const { readdirSync, lstatSync } = require('fs');
 const { exec } = require('child_process');
 
-const exclude = ["node_modules", ".git"];
+const exclude = ["node_modules", ".git", ".github"];
 const isDirectory = (dir) => lstatSync(dir).isDirectory();
 
 (async function () {
