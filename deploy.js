@@ -16,8 +16,8 @@ const isDirectory = (dir) => lstatSync(dir).isDirectory();
             if (err) {
                 await console.error(err);
                 await console.log(`[✖] Deploy of ${project} failed`);
-                return;
-            }
+                return process.exit(1);
+            };
             await console.log(stdout);
             if (stderr) await console.log(stderr);
         });
