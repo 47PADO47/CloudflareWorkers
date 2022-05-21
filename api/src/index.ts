@@ -22,6 +22,11 @@ export default {
       code: 404,
     }), { status: 404 });
 
+    if (route.auth && !request.headers.get('Authorization')) return new Response(JSON.stringify({
+      error: "Missing authorization header",
+      code: 401,
+    }), { status: 401 });
+
     return route.handle(request);
   },
 };
