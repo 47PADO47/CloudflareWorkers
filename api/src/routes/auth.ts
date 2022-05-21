@@ -33,7 +33,7 @@ class AuthRoute extends BaseRoute {
                 }), { status: 401 });
 
                 return new Response(JSON.stringify({
-                    token: `Bearer ${btoa(`${body.username}:${body.password}`)}`,
+                    token: `${btoa(`${body.username}:${body.password}`)}`,
                 }), { status: 200 });
             
             default:

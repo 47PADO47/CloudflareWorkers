@@ -1,5 +1,7 @@
 import routes from "./routes";
+import { Admin } from "./types/Constants";
 import { Route } from "./types/Route";
+import { ADMINS } from "./utils/Constants";
 /**
  * Welcome to Cloudflare Workers! This is your first worker.
  *
@@ -22,8 +24,17 @@ export default {
       code: 404,
     }), { status: 404 });
 
-    if (route.auth && !request.headers.get('Authorization')) return new Response(JSON.stringify({
+    if (!route.auth) return route.handle(request); 
+
+    if (!request.headers.get('Authorization')) return new Response(JSON.stringify({
       error: "Missing authorization header",
+      code: 401,
+    }), { status: 401 });
+
+    const find = ADMINS.find((admin: Admin) => `${admin.username}:${admin.password}` === atob(request.headers.get('Authorization') || ""));
+    
+    if (!find) return new Response(JSON.stringify({
+      error: "Invalid authorization header",
       code: 401,
     }), { status: 401 });
 
