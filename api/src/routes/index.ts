@@ -3,6 +3,7 @@ import AuthRoute from './auth';
 import MainRoute from './main';
 import TestRoute from './test';
 import VengeioRoute from './vengeio';
+import AssetsRoute from './assets';
 
 const routes = [
     {
@@ -21,6 +22,10 @@ const routes = [
     {
         name: 'auth',
         handle: AuthRoute.handle,
+    },
+    {
+        name: 'assets',
+        handle: AssetsRoute.handle,
     }
 ] as Route[];
 
